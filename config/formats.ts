@@ -27,6 +27,25 @@ export const Formats: FormatList = [
 		// name: "gen9petmods",
 	},
 	{
+		name: "[Gen 9] Koopamon",
+		mod: "koopamon",
+		desc: [
+			`<b>Koopamon!.`
+		],
+		ruleset: ['Standard', 'Data Mod'],
+		banlist: ['Moody'],
+		onValidateTeam(team, format) {
+			let speciesTable = {};
+			let allowedTiers = ['KOOPAMON'];
+			for (const set of team) {
+				let template = this.dex.species.get(set.species);
+				if ( !allowedTiers.includes(template.tier) ) {
+					return [set.species + ' is not useable in Koopamon.'];
+				}
+			}
+		},
+	},
+	{
 		name: "[Gen 9] Alternatium EX",
 		desc: `<b>Alternatium EX</b>: A metagame made up of only Pokemon with alternate forms exist, with all of them being seperate and unique Pokemon.`,
 		threads: [
