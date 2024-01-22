@@ -25,7 +25,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		fusion: ['Toxapex', 'Chandelure'],
 		num: 2,
 		name: "Toxalure",
-		types: ["Ghost", "Water"],
+		types: ["Fire", "Water"],
 		baseStats: {hp: 75, atk: 59, def: 121, spa: 109, spd: 126, spe: 57},
 		abilities: {0: "Despicable"},
 		weightkg: 24.4,
