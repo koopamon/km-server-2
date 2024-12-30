@@ -17,6 +17,32 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.damage(pokemon.baseMaxhp / 16);
 		},
 	},
+	fbt: {
+		name: 'fbt',
+		effectType: 'Status',
+		onStart(target, source, sourceEffect) {
+			if (sourceEffect && sourceEffect.id === 'frostorb') {
+				this.add('-status', target, 'fbt', '[from] item: Frost Orb');
+			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
+				this.add('-status', target, 'fbt', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
+			} else {
+				this.add('-status', target, 'fbt');
+			}
+		},
+		onModifySpa(spa, pokemon) {
+			// Paralysis occurs after all other Speed modifiers, so evaluate all modifiers up to this point first
+			spa = this.finalModify(spe);
+			if (!pokemon.hasAbility('guts', 'frostboost')) {
+				spa = Math.floor(spa * 50 / 100);
+			}
+			return spa;
+		},
+		// Damage reduction is handled directly in the sim/battle.js damage function
+		onResidualOrder: 10,
+		onResidual(pokemon) {
+			this.damage(pokemon.baseMaxhp / 16);
+		},
+	},
 	par: {
 		name: 'par',
 		effectType: 'Status',
